@@ -12,7 +12,8 @@ const gameDiv = document.getElementById('game');
 // position of car in the UI
 let carPosition = {
     x:0,
-    y:0
+    y:0,
+    speed:10
 }
 
 // player / user press which key
@@ -23,31 +24,51 @@ var player = {
     ArrowRight: false
 } // so initailly use doesn't press any key
 
+ function moveLine(){
+    const lines = document.querySelectorAll('.line');
+   
+    console.log(typeof lines);
+    console.log(lines);
+    lines.forEach( (line) => {
+        var top = line.offsetTop;
+         const gameContainerDetails = gameDiv.getBoundingClientRect();
+        if (line.offsetTop > gameContainerDetails.bottom) {
+          top = 0;
+        }
+        // update the top value;
+        line.style.top = top + carPosition.speed + 'px';
+    });
+ }
+
 
 //animation function (so we want that animation in loop so we can make this function a recursive function)
 function playGame(){
     // code for making car moving
+    moveLine();
     const car = document.getElementById('car');
     const gameDiv = document.getElementById('game');
     const gameDivDetails = gameDiv.getBoundingClientRect();
     console.log(gameDivDetails);
     if(player.ArrowUp && carPosition.y > gameDivDetails.top ){  // it enters in if block when player.Arrowup:true
        // car should move to the upward (so we have to decrease the top value)
-       carPosition.y -= 5;   // top ki taraf jaayegaa
+       carPosition.y -= carPosition.speed;   // top ki taraf jaayegaa
     }
 
     if(player.ArrowDown && carPosition.y < gameDivDetails.bottom -170){
-        carPosition.y += 5;   // bottom ki taraf aayegaa
+        carPosition.y += carPosition.speed;   // bottom ki taraf aayegaa
     }
 
     if(player.ArrowRight && carPosition.x < gameDivDetails.right - 225 ){
-        carPosition.x += 5;
+        carPosition.x += carPosition.speed;
     }
 
     if(player.ArrowLeft && carPosition.x > 5){
-        carPosition.x -=5;
+        carPosition.x -= carPosition.speed;
     }
 
+
+    score++;
+    scoreDiv.textContent = score;
     car.style.top = carPosition.y + "px";
     car.style.left = carPosition.x + "px";
     // this code will make car moving but the problem is it will go out the game section so for that
@@ -79,6 +100,13 @@ function gameStart(){
         gameDiv.appendChild(line);
         top  = top + 150;
     }// this will create a 4 lines
+
+    const enemyDiv = document.createElement('div');
+     enemyDiv.classList.add("enemy");
+     enemyDiv.style.top = Math.floor(Math.random() * 400) + "px";
+     enemyDiv.style.left = Math.floor(Math.random() * 350) + "px";
+
+     gameDiv.appendChild(enemyDiv);
 
     // for creating animation by using dom we have function
     window.requestAnimationFrame(playGame);
