@@ -1,0 +1,75 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    background-color: aquamarine;
+    width: 98vw;
+    height: 99vh;
+    position: relative;
+    overflow: hidden;
+}
+
+#score{
+    background-color: black;
+    width: 97%;
+    height: 10%;
+    position: relative;
+    top: 2px;
+    left: 7px;
+}
+
+#start{
+    background-color: red;
+    width: 50%;
+    height: 15%;
+    position: fixed;
+    z-index: 1;
+    left: 23%;
+    top: 15%;
+    color: white;
+    text-align: center;
+    font-size: 17px;
+    cursor: pointer;
+    padding: 15px;
+}
+
+#game{
+    background-color: black;
+    height: 90%;
+    width: 35%;
+    position: relative;
+    left: 30%;
+}
+
+
+/* dynamic css add to display none the startDiv */
+.displayNone{
+    display: none;
+}
+
+/* car div Css for creating a car */
+#car{
+    background-image: url("https://raw.githubusercontent.com/Anshu-rai89/acciojob-session-f3/main/feb/car-game.js/car2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: white;
+    width: 50px;
+    height: 100px;
+    position: absolute;
+    bottom: 5px;
+    left: 7px;
+    border-radius: 2px;
+    z-index: 2;
+}
+
+/* Css for game div lines */
+.line{
+    background-color: white;
+    width: 8px;
+    height: 6rem;
+    position: absolute;
+    left: 50%;
+}
